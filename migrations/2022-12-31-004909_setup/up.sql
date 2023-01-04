@@ -1,0 +1,44 @@
+-- Your SQL goes here
+
+-- categories
+CREATE TABLE categories (
+	category VARCHAR(100) NOT NULL,
+	CONSTRAINT PK_CATEGORY PRIMARY KEY (category)
+);
+
+-- question_types
+CREATE TABLE question_types (
+	question_type VARCHAR(20) NOT NULL,
+	CONSTRAINT PK_QUESTION_TYPE PRIMARY KEY (question_type)
+);
+
+-- questions
+CREATE TABLE questions (
+	id INT NOT NULL AUTO_INCREMENT,
+	category VARCHAR(100) NOT NULL,
+	question_type VARCHAR(20) NOT NULL,
+	key_command VARCHAR(100) NOT NULL,
+	discord TINYINT NOT NULL,
+	question TEXT NOT NULL,
+	CONSTRAINT PK_QUESTION PRIMARY KEY (id),
+	CONSTRAINT FK_QUESTION_ON_CATEGORY FOREIGN KEY (category) REFERENCES categories(category),
+	CONSTRAINT FK_QUESTION_ON_QUESTION_TYPE FOREIGN KEY (question_type) REFERENCES question_types(question_type)
+);
+
+-- multiple_answers
+CREATE TABLE multiple_answers (
+	id INT NOT NULL AUTO_INCREMENT,
+	question INT NOT NULL,
+	answer TEXT NOT NULL,
+	CONSTRAINT PK_MULTIPLE_ANSWERS PRIMARY KEY (id),
+	CONSTRAINT FK_MULTIPLE_ANSWERS_ON_QUESTION FOREIGN KEY (question) REFERENCES questions(id)
+);
+
+-- questions_data
+CREATE TABLE questions_data (
+	id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	question INT NOT NULL,
+	answer TEXT NOT NULL,
+	CONSTRAINT PK_QUESTIONS_DATA PRIMARY KEY (id),
+	CONSTRAINT FK_QUESTIONS_DATA_ON_QUESTION FOREIGN KEY (question) REFERENCES questions(id)
+);
