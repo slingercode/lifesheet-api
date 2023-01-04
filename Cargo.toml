@@ -1,7 +1,9 @@
 [package]
-name = "journal-api"
+name = "lifesheet-api"
 version = "0.1.0"
 edition = "2021"
+rust-version = "1.66.0"
+authors = ["Noel Espino <hi@ednoesco.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
